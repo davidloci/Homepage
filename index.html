@@ -1,33 +1,218 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Homepage</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: #050816;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-    img {
-      width: 420px;
-      max-width: 90%;
-      border-radius: 20px;
-      box-shadow: 0 0 40px #00d4ff;
-    }
-    h1 {
-      font-size: 4rem;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenidos</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #0a0a0a;
+    color: #e0e0e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+  /* Intro */
+  #intro {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 100%);
+  }
+  #intro h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff6b35, #f7c548, #ff6b35);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 30px rgba(255,107,53,0.3);
+    animation: shine 3s linear infinite;
+    letter-spacing: 2px;
+  }
+  @keyframes shine { to { background-position: 200% center; } }
+  .video-wrapper {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16/9;
+    border: 2px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(255,107,53,0.2);
+  }
+  .video-wrapper iframe { width: 100%; height: 100%; border: 0; }
+  .skip-btn {
+    margin-top: 1.5rem;
+    background: transparent;
+    border: 1px solid #555;
+    color: #ccc;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .2s;
+    font-size: 0.9rem;
+  }
+  .skip-btn:hover { background: #ff6b35; border-color: #ff6b35; color: #000; }
+
+  /* Main app */
+  #app { display: none; min-height: 100vh; }
+  nav {
+    background: #111;
+    border-bottom: 1px solid #222;
+    padding: 1rem 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav button {
+    background: transparent;
+    color: #ccc;
+    border: 1px solid #333;
+    padding: 0.7rem 1.8rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all .25s;
+    font-weight: 500;
+  }
+  nav button:hover { border-color: #ff6b35; color: #ff6b35; }
+  nav button.active {
+    background: linear-gradient(135deg, #ff6b35, #f7c548);
+    color: #000;
+    border-color: transparent;
+  }
+  section.page { display: none; padding: 3rem 2rem; animation: fadeIn .5s; }
+  section.page.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(10px);} to {opacity:1; transform:none;} }
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(90deg, #ff6b35, #f7c548);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .card {
+    background: #141414;
+    border: 1px solid #222;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  .quien-content { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
+  .quien-content img {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 3px solid #ff6b35;
+    box-shadow: 0 0 30px rgba(255,107,53,0.3);
+  }
+  .quien-content p { font-size: 1.8rem; font-weight: 600; }
+  .quiero p { font-size: 2.5rem; text-align: center; padding: 2rem; }
+  @media (max-width: 600px) {
+    #intro h1 { font-size: 2.5rem; }
+    .quien-content img { width: 100%; height: auto; }
+  }
+</style>
 </head>
 <body>
-  <h1>Hello World</h1>
-  <img src="https://images.unsplash.com/photo-1614728263952-84ea256f9679?q=80&w=1200" alt="Futuristic Earth">
+
+<div id="intro">
+  <h1>Bienvenidos</h1>
+  <div class="video-wrapper">
+    <iframe id="ytplayer"
+      src="https://www.youtube.com/embed/QGVIWsw-TYQ?enablejsapi=1&autoplay=1&controls=1&rel=0&modestbranding=1&playsinline=1"
+      allow="autoplay; encrypted-media"
+      allowfullscreen></iframe>
+  </div>
+  <audio id="bgMusic" loop preload="auto"
+    src="https://archive.org/download/Kevin-Macleod_Action-Cuts_2014_FullAlbum/Action%20Cuts/Kevin%20MacLeod%20-%2012%20-%20Heroic%20Age.mp3"></audio>
+  <button class="skip-btn" onclick="showApp()">Saltar intro →</button>
+</div>
+
+<div id="app">
+  <nav>
+    <button data-page="quien" class="active" onclick="navigate('quien')">Quién soy</button>
+    <button data-page="quiero" onclick="navigate('quiero')">Qué quiero</button>
+  </nav>
+
+  <div class="container">
+    <section id="quien" class="page active">
+      <h2>Quién soy</h2>
+      <div class="card">
+        <div class="quien-content">
+          <img src="david.png" alt="David">
+          <p>David, yo mismo</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiero" class="page">
+      <h2>Qué quiero</h2>
+      <div class="card quiero">
+        <p>🥡 comida china 🥢</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+  // Auto-show menu after ~30 seconds as fallback (YouTube end event needs API)
+  // Use YouTube IFrame API to detect end
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.head.appendChild(tag);
+
+  let player;
+  const bgMusic = document.getElementById('bgMusic');
+  bgMusic.volume = 0.4;
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('ytplayer', {
+      events: {
+        'onStateChange': (e) => {
+          if (e.data === YT.PlayerState.PLAYING) {
+            bgMusic.play().catch(()=>{});
+          } else if (e.data === YT.PlayerState.PAUSED) {
+            bgMusic.pause();
+          } else if (e.data === YT.PlayerState.ENDED) {
+            bgMusic.pause();
+            bgMusic.currentTime = 0;
+            showApp();
+          }
+        }
+      }
+    });
+  }
+
+  function showApp() {
+    try { bgMusic.pause(); } catch(e){}
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    window.scrollTo(0,0);
+  }
+
+  function navigate(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    document.getElementById(page).classList.add('active');
+    document.querySelector(`nav button[data-page="${page}"]`).classList.add('active');
+  }
+</script>
+
 </body>
 </html>
